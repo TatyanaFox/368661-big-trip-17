@@ -14,7 +14,6 @@ export default class EventPresenter {
     this.eventModel = eventModel;
     this.event = [...this.eventModel.getPoint()];
     this.offer = [...this.eventModel.getOffer()];
-    console.log(this.event);
 
     render(this.listEventComponent, this.eventContainer);
     render(new EditEventView(this.event[0]), this.listEventComponent.getElement());
