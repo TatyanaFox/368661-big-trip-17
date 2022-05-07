@@ -5,21 +5,27 @@ import EditEventView from '../view/edit-form';
 import { render } from '../render';
 
 export default class EventPresenter {
-  eventComponent = new EventView();
-  listEventComponent = new ListEventsView();
-  editEventView = new EditEventView();
+  #eventContainer = null;
+  #eventModel =null;
+
+  #eventComponent = new EventView();
+  #listEventComponent = new ListEventsView();
+  #editEventView = new EditEventView();
+
+  #event = [];
 
   init = (eventContainer, eventModel) => {
-    this.eventContainer = eventContainer;
-    this.eventModel = eventModel;
-    this.event = [...this.eventModel.getPoint()];
-    this.offer = [...this.eventModel.getOffer()];
+    this.#eventContainer = eventContainer;
+    this.#eventModel = eventModel;
+    this.#event = [...this.#eventModel.point];
 
-    render(this.listEventComponent, this.eventContainer);
-    render(new EditEventView(this.event[0]), this.listEventComponent.getElement());
+    render(this.#listEventComponent, this.#eventContainer);
+    render(new EditEventView(this.#event[0]), this.#listEventComponent.element);
 
-    for (let i = 1; i < this.event.length; i++) {
-      render(new EventView(this.event[i]), this.listEventComponent.getElement());
+    for (let i = 1; i < this.#event.length; i++) {
+      render(new EventView(this.#event[i]), this.#listEventComponent.element);
     }
   };
+
+
 }
