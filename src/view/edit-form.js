@@ -100,23 +100,26 @@ const editEvent = (point) => {
 };
 
 export default class EditEventView {
+  #element = null;
+  #item = null;
+
   constructor(item) {
-    this._item = item;
+    this.#item = item;
   }
 
-  getTemplate() {
-    return editEvent(this._item);
+  get template() {
+    return editEvent(this.#item);
   }
 
-  getElement() {
-    if (!this._element) {
-      this._element = createElement(this.getTemplate());
+  get element() {
+    if (!this.#element) {
+      this.#element = createElement(this.template);
     }
 
-    return this._element;
+    return this.#element;
   }
 
   removeElement() {
-    this._element = null;
+    this.#element = null;
   }
 }
