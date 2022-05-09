@@ -20,12 +20,45 @@ export default class EventPresenter {
     this.#event = [...this.#eventModel.point];
 
     render(this.#listEventComponent, this.#eventContainer);
-    render(new EditEventView(this.#event[0]), this.#listEventComponent.element);
 
-    for (let i = 1; i < this.#event.length; i++) {
-      render(new EventView(this.#event[i]), this.#listEventComponent.element);
+    for (let i = 0; i < this.#event.length; i++) {
+      this.#renderEvent(this.#event[i]);
     }
   };
 
+  #renderEvent = (event) => {
+    const eventComponent = new EventView(event);
+    const editEventComponent = new EditEventView(event);
 
+
+    const replacePointToForm = () => {
+      this.#listEventComponent.element.replaceChild(editEventComponent.element, eventComponent.element);
+    };
+
+    const replaceFormToPoint = () => {
+      this.#listEventComponent.element.replaceChild(eventComponent.element, editEventComponent.element);
+    };
+
+    const onEscKeyDown = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        replaceFormToPoint();
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
+    };
+
+    eventComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replacePointToForm();
+      document.addEventListener('keydown', onEscKeyDown);
+    });
+
+    editEventComponent.element.querySelector('form').addEventListener('submit', (evt) => {
+      evt.preventDefault();
+      replaceFormToPoint();
+      document.removeEventListener('keydown', onEscKeyDown);
+    });
+
+
+    render(eventComponent, this.#listEventComponent.element);
+  };
 }
