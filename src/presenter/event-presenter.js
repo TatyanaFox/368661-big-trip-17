@@ -1,6 +1,7 @@
 import ListEventsView from '../view/list-events-view';
 import EventView from '../view/event-view';
 import EditEventView from '../view/edit-form';
+import NoEventsView from '../view/no-event-view';
 
 import { render } from '../render';
 
@@ -11,6 +12,7 @@ export default class EventPresenter {
   #eventComponent = new EventView();
   #listEventComponent = new ListEventsView();
   #editEventView = new EditEventView();
+  #noEventsView = new NoEventsView();
 
   #event = [];
 
@@ -21,8 +23,12 @@ export default class EventPresenter {
 
     render(this.#listEventComponent, this.#eventContainer);
 
-    for (let i = 0; i < this.#event.length; i++) {
-      this.#renderEvent(this.#event[i]);
+    if (this.#event.length < 1) {
+      render(this.#noEventsView, this.#listEventComponent.element);
+    } else {
+      for (let i = 0; i < this.#event.length; i++) {
+        this.#renderEvent(this.#event[i]);
+      }
     }
   };
 
