@@ -1,7 +1,7 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view.js';
 import {humanizePointDueDate} from '../utils';
 
-const event = (point) => {
+const createEvent = (point) => {
   const {basePrice, dateFrom, dateTo, destination, id, isFavorite, type} = point;
   const dateF = dateFrom !== null
     ? humanizePointDueDate(dateFrom)
@@ -55,28 +55,25 @@ const event = (point) => {
   );
 };
 
-export default class EventView {
-  #element = null;
+export default class EventView extends AbstractView {
   #point = null;
 
   constructor(point) {
+    super();
     this.#point = point;
   }
 
   get template() {
-    return event(this.#point);
+    return createEvent(this.#point);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  setEditClickHandler = (callback) => {
+    this._callback.editClick = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#editClickHandler);
+  };
 
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
-  }
+  #editClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.editClick();
+  };
 }
-

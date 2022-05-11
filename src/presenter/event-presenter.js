@@ -1,9 +1,9 @@
+import { render } from '../framework/render.js';
+
 import ListEventsView from '../view/list-events-view';
 import EventView from '../view/event-view';
 import EditEventView from '../view/edit-form';
 import NoEventsView from '../view/no-event-view';
-
-import { render } from '../render';
 
 export default class EventPresenter {
   #eventContainer = null;
@@ -53,17 +53,15 @@ export default class EventPresenter {
       }
     };
 
-    eventComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    eventComponent.setEditClickHandler(() => {
       replacePointToForm();
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editEventComponent.element.querySelector('form').addEventListener('submit', (evt) => {
-      evt.preventDefault();
+    editEventComponent.setFormSubmitHandler(() => {
       replaceFormToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
     });
-
 
     render(eventComponent, this.#listEventComponent.element);
   };
