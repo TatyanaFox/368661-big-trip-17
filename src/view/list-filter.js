@@ -1,6 +1,6 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view';
 
-const filters = () => {
+const createFilters = () => {
   const filterElement = (
     `<div class="trip-filters__filter">
       <input id="filter-everything" class="trip-filters__filter-input  visually-hidden" type="radio" name="trip-filter" value="everything" checked>
@@ -20,20 +20,8 @@ const filters = () => {
   );
 };
 
-export default class FiltersView {
-  getTemplate() {
-    return filters();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
+export default class FiltersView extends AbstractView {
+  get template() {
+    return createFilters();
   }
 }

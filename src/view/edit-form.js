@@ -1,7 +1,7 @@
-import { createElement } from '../render';
+import AbstractView from '../framework/view/abstract-view.js';
 import {types, places} from '../const';
 
-const editEvent = (point) => {
+const createEditEvent = (point) => {
   const {basePrice, destination, offers, type} = point;
   const typePoint = types.map((i) => (
     `<div class="event__type-item">
@@ -99,27 +99,25 @@ const editEvent = (point) => {
   );
 };
 
-export default class EditEventView {
-  #element = null;
-  #item = null;
+export default class EditEventView extends AbstractView {
+  #point = null;
 
-  constructor(item) {
-    this.#item = item;
+  constructor(point) {
+    super();
+    this.#point = point;
   }
 
   get template() {
-    return editEvent(this.#item);
+    return createEditEvent(this.#point);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
-    }
+  setFormSubmitHandler = (callback) => {
+    this._callback.formSubmit = callback;
+    this.element.querySelector('form').addEventListener('submit', this.#formSubmitHandler);
+  };
 
-    return this.#element;
-  }
-
-  removeElement() {
-    this.#element = null;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  };
 }
