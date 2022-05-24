@@ -1,4 +1,4 @@
-import {getRandomData, getRandomNum} from '../utils';
+import {getRandomData, getRandomNum} from '../utils/point';
 import {types} from '../const';
 import {generateDestination} from './destination';
 import {generateOffers} from './offer';

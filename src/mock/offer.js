@@ -1,4 +1,4 @@
-import {getRandomData, getRandomNum} from '../utils';
+import {getRandomData, getRandomNum} from '../utils/point';
 import {types} from '../const';
 
 export const generateOffers = () => (

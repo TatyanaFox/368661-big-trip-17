@@ -8,7 +8,7 @@ import EventPresenter from './presenter/event-presenter';
 import EventModel from './model/event-model';
 
 const siteMainElement = document.querySelector('.page-body');
-const siteFiltersElement = siteMainElement.querySelector('.trip-controls__filters');
+const siteFiltersElement = siteMainElement.querySelector('.page-body__container');
 const siteContentElement = siteMainElement.querySelector('.trip-events');
 
 const eventModel = new EventModel();
