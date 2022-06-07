@@ -1,17 +1,21 @@
 import dayjs from 'dayjs';
+import { getRandomNum } from './common';
 
-const getRandomData = (arr) => {
-  const rand = Math.floor(Math.random() * arr.length);
-  return arr[rand];
+const generateDateFrom = () => {
+  const maxDaysGap = 7;
+  const daysGap = getRandomNum(-maxDaysGap, maxDaysGap);
+
+  return dayjs().add(daysGap, 'day').toDate();
 };
 
-const getRandomNum = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+const generateDateTo = () => {
+  const daysGap = getRandomNum(0, 24);
 
-  return Math.floor(lower + Math.random() * (upper - lower + 1));
+  return daysGap;
 };
 
 const humanizePointDueDate = (dueDate) => dayjs(dueDate).format('h:mm A');
 
-export {getRandomData, getRandomNum, humanizePointDueDate};
+const isEventPassed = (dueDate) => dueDate && dayjs().isAfter(dueDate, 'D');
+
+export {humanizePointDueDate, isEventPassed, generateDateTo, generateDateFrom};

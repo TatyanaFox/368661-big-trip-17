@@ -3,12 +3,9 @@ const types = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 's
 const places = ['Amsterdam', 'Berlin', 'Palermo', 'Tokio', 'Moscow'];
 
 const FilterType = {
-  COST: 'cost'
-  // DAY: 'day',
-  // EVENT: 'event',
-  // TIME: 'time',
-  // PRICE: 'price',
-  // OFFERS: 'offers'
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past',
 };
 
 export {types, places, FilterType};

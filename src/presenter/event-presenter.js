@@ -1,4 +1,4 @@
-import { render } from '../framework/render.js';
+import { render, replace } from '../framework/render.js';
 
 import ListEventsView from '../view/list-events-view';
 import EventView from '../view/event-view';
@@ -7,7 +7,7 @@ import NoEventsView from '../view/no-event-view';
 
 export default class EventPresenter {
   #eventContainer = null;
-  #eventModel =null;
+  #eventModel = null;
 
   #eventComponent = new EventView();
   #listEventComponent = new ListEventsView();
@@ -38,11 +38,11 @@ export default class EventPresenter {
 
 
     const replacePointToForm = () => {
-      this.#listEventComponent.element.replaceChild(editEventComponent.element, eventComponent.element);
+      replace(editEventComponent, eventComponent);
     };
 
     const replaceFormToPoint = () => {
-      this.#listEventComponent.element.replaceChild(eventComponent.element, editEventComponent.element);
+      replace(eventComponent, editEventComponent);
     };
 
     const onEscKeyDown = (evt) => {
