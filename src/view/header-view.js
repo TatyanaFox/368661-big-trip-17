@@ -1,8 +1,7 @@
 import AbstractView from '../framework/view/abstract-view';
 
-const createHeader = () => {
-  return (
-    `<section class="trip-main__trip-info  trip-info">
+const createHeader = () => (
+  `<section class="trip-main__trip-info  trip-info">
       <div class="trip-info__main">
         <h1 class="trip-info__title">Amsterdam &mdash; Chamonix &mdash; Geneva</h1>
 
@@ -13,8 +12,7 @@ const createHeader = () => {
         Total: &euro;&nbsp;<span class="trip-info__cost-value">1230</span>
       </p>
     </section>`
-  );
-};
+);
 
 export default class HeaderView extends AbstractView {
   get template() {
