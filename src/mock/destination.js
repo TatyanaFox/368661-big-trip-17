@@ -1,4 +1,4 @@
-import {getRandomData, getRandomNum} from '../utils';
+import {getRandomData, getRandomNum} from '../utils/common';
 
 const places = ['Amsterdam', 'Berlin', 'Moscow', 'Paris', 'Tokio'];
 
